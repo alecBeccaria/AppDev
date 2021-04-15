@@ -31,14 +31,6 @@ export default function App() {
   );
 }
 
-// ReactDOM.render(
-//   <App />,
-//   document.getElementById('root')
-// );
-
-
-
-
 
 const styles = StyleSheet.create({
   container: {
