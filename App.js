@@ -1,28 +1,28 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
-import { ImageEditor, StyleSheet, Text, View,   } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import { StyleSheet, Text, View,   } from 'react-native';
 
-function GetThemGifs(search){
-  const [gifs, setGifs] = useState([]);
-   
-  const API_KEY = 'rWOK4M7qED2lP87FJ3tXWfXjrYPKML31';
-  let url = 'https://api.giphy.com/v1/gifs/search?api_key={' + API_KEY + '}&q=${'+ search + '}&limit=10&offset=0&rating=G&lang=en';
-  fetch(url, {
-    method: 'GET'
+function GetThemGifs({search}){
+  const [gifs, setGifs] = useState(null);
 
-  })
-  .then(response => response.json())
-  .then(json => {
-    let gifs = json.data
-    setGifs(json.data.images.downsized_medium)
-  })
+  useEffect(() => {
+      async function getGiphys(search){
+        const API_KEY = 'rWOK4M7qED2lP87FJ3tXWfXjrYPKML31';
+        let url = "https://api.giphy.com/v1/gifs/search?api_key=rWOK4M7qED2lP87FJ3tXWfXjrYPKML31&q="+ search +"&limit=10&offset=0&rating=G&lang=en";
+        const data = await fetch(url, {method: 'GET'})
+      }
+  }, []);
 
-  return <Image source={{uri: gifs }} style={{width: 250, height: 250}} />
+  return (
+    <View>
+      <Image source={{uri: gifs }} style={{width: 250, height: 250}} />
+    </View>
+  )
 }
 
+
 export default function App() {
-    // gifs: gifs.map(g => g.images), 
-    // randomId: Math.floor(Math.random() * 10)
+    
   return (
     <View style={styles.container}>
       <Text>Open up App.js yeso start working on your app!</Text>
